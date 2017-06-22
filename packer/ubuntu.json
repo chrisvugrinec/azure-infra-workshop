@@ -1,0 +1,41 @@
+{
+  "variables": {
+    "azure_client_id": "{{env `AZURE_CLIENT_ID`}}",
+    "azure_client_secret": "{{env `AZURE_CLIENT_SECRET`}}",
+    "azure_resourcegroup": "{{env `AZURE_RESOURCEGROUP`}}",
+    "azure_subscriptionid": "{{env `AZURE_SUBSCRIPTIONID`}}",
+    "azure_tenantid": "{{env `AZURE_TENANTID`}}"
+  },
+  "builders": [{
+    "type": "azure-arm",
+
+    "client_id": "{{user `azure_client_id`}}",
+    "client_secret": "{{user `azure_client_secret`}}",
+    "resource_group_name": "{{user `azure_resourcegroup`}}",
+    "subscription_id": "{{user `azure_subscriptionid`}}",
+    "tenant_id": "{{user `azure_tenantid`}}",
+    "storage_account": "virtualmachines",
+    "capture_container_name": "images",
+    "capture_name_prefix": "packer",
+
+    "os_type": "Linux",
+    "image_publisher": "Canonical",
+    "image_offer": "UbuntuServer",
+    "image_sku": "14.04.4-LTS",
+
+    "azure_tags": {
+      "dept": "engineering"
+    },
+
+    "location": "westeurope",
+    "vm_size": "Standard_A2"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "sleep 30",
+      "sudo apt-get update",
+      "sudo apt-get install -y redis-server"
+    ]
+  }]
+}
