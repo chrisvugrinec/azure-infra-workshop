@@ -2,7 +2,7 @@
 echo "name:"
 read name
 echo "page:"
-read page
+page="http://$name.com"
 echo "password:"
 read password
 

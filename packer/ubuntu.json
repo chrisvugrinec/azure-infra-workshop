@@ -2,9 +2,10 @@
   "variables": {
     "azure_client_id": "{{env `AZURE_CLIENT_ID`}}",
     "azure_client_secret": "{{env `AZURE_CLIENT_SECRET`}}",
-    "azure_resourcegroup": "{{env `AZURE_RESOURCEGROUP`}}",
+    "azure_resourcegroup": "packerdemo",
     "azure_subscriptionid": "{{env `AZURE_SUBSCRIPTIONID`}}",
-    "azure_tenantid": "{{env `AZURE_TENANTID`}}"
+    "azure_tenantid": "{{env `AZURE_TENANTID`}}",
+    "azure_storage_account": "{{env `AZURE_STORAGEACCOUNT`}}"
   },
   "builders": [{
     "type": "azure-arm",
@@ -14,14 +15,14 @@
     "resource_group_name": "{{user `azure_resourcegroup`}}",
     "subscription_id": "{{user `azure_subscriptionid`}}",
     "tenant_id": "{{user `azure_tenantid`}}",
-    "storage_account": "virtualmachines",
+    "storage_account": "{{user `azure_storage_account`}}",
     "capture_container_name": "images",
     "capture_name_prefix": "packer",
 
     "os_type": "Linux",
     "image_publisher": "Canonical",
     "image_offer": "UbuntuServer",
-    "image_sku": "14.04.4-LTS",
+    "image_sku": "16.10",
 
     "azure_tags": {
       "dept": "engineering"
